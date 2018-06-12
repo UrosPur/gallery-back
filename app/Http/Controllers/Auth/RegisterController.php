@@ -90,12 +90,10 @@ class RegisterController extends Controller
 
         ]);
 
-        //maybe? test at work
-//        dd($registerUser->fails());
 
         if($registerUser->fails()){
 
-            return response()->json(['error' => 'check ivalues and try again']);
+            return response()->json(['error' => 'check input fields and try again']);
         }
 
     }
