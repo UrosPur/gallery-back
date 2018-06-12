@@ -55,8 +55,8 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'terms' => 'required|not_in:0',
+            'password' => 'required|string|min:6',
+            'terms' => 'required|in:1',
         ]);
     }
 
@@ -86,11 +86,17 @@ class RegisterController extends Controller
             'last_name' => $request['last_name'],
             'email' => $request['email'],
             'password' => $request['password'],
-            'terms' => $request['term']
+            'terms' => (int)$request['term']
 
         ]);
 
         //maybe? test at work
-        dd($registerUser->fails());
+//        dd($registerUser->fails());
+
+        if($registerUser->fails()){
+
+            return response()->json(['error' => 'check ivalues and try again']);
+        }
+
     }
 }
