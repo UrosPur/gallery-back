@@ -20,3 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('api')->post('/login','Auth\LoginController@authenticate')->name('login');
 
 Route::middleware('api')->post('/register','Auth\RegisterController@register')->name('register');
+
+
+Route::middleware('api')->get('/galleries','GalleryController@index')->name('galleries');
+
+Route::middleware('api')->get('/galleries/{id}','GalleryController@show')->name('gallery');
+
+
+Route::middleware('jwt')->put('/galleries/{id}','GalleryController@update')->name('gallery-update');
+
