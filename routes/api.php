@@ -27,5 +27,9 @@ Route::middleware('api')->get('/galleries','GalleryController@index')->name('gal
 Route::middleware('api')->get('/galleries/{id}','GalleryController@show')->name('gallery');
 
 
+Route::middleware('jwt')->post('/galleries','GalleryController@store')->name('gallery-store');
 Route::middleware('jwt')->put('/galleries/{id}','GalleryController@update')->name('gallery-update');
+
+Route::middleware('jwt')->get('/author/{id}','UserController@show')->name('profile');
+
 

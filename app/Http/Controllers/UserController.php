@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Gallery;
+use App\User;
 
-class GalleryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return Gallery::all();
+        //
     }
 
     /**
@@ -35,7 +35,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        dd(250);
+        //
     }
 
     /**
@@ -46,7 +46,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        return Gallery::find($id);
+        return User::with('galleries')->find($id);
     }
 
     /**
@@ -69,7 +69,7 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd(200);
+        //
     }
 
     /**
