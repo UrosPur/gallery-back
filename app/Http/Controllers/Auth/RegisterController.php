@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
             'terms' => 'required|in:1',
         ]);
     }
@@ -86,6 +86,7 @@ class RegisterController extends Controller
             'last_name' => $request['last_name'],
             'email' => $request['email'],
             'password' => $request['password'],
+            'password_confirmation' => $request['password_confirmation'],
             'terms' => (int)$request['term']
 
         ]);
@@ -94,7 +95,39 @@ class RegisterController extends Controller
         if($registerUser->fails()){
 
             return response()->json(['error' => 'check input fields and try again']);
+        }else{
+
+
+        $this->create([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'terms' => $request['terms']
+        ]);
+
+
+            $credentials = $request->only([ 'email', 'password' ]);
+
+            try {
+                // attempt to verify the credentials and create a token for the user
+                if (! $token = \JWTAuth::attempt($credentials)) {
+                    return response()->json(['message' => 'Invalid username and/or password.', 'error' => 'invalid_credentials'], 401);
+                }
+            } catch (JWTException $e) {
+                // something went wrong whilst attempting to encode the token
+                return response()->json(['error' => 'could_not_create_token'], 500);
+            }
+
+            // all good so return the token
+            $registerUser = Auth::user();
+            return response()->json(compact('token', 'registerUser'));
+
+
+
+
         }
+
 
     }
 }
