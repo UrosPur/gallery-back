@@ -46,7 +46,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        return Gallery::find($id);
+        return Gallery::where('id', $id)->with('images', 'user')->first();
     }
 
     /**
