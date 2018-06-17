@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Gallery;
 use App\User;
@@ -122,14 +123,24 @@ class GalleryController extends Controller
         dd(200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+//        return response()->json(compact('You do not have permissions todelete this gallery'));
+//
+//        if($request['USERID']){
+//
+//        $gallery = Gallery::find($request['id']);
+//        $gallery->delete();
+//        return response()->json(compact('deleted'));
+//
+//        }
+
+        $gallery = Gallery::find($id);
+        $gallery->delete();
+
+        return new JsonResponse(true);
+
+
+
     }
 }
