@@ -31,5 +31,6 @@ Route::middleware('jwt')->post('/galleries','GalleryController@store')->name('ga
 Route::middleware('jwt')->put('/galleries/{id}','GalleryController@update')->name('gallery-update');
 
 Route::middleware('jwt')->get('/my-galleries/{id}','GalleryController@singleUserGalleries')->name('profile');
+Route::middleware('jwt')->get('/author-galleries/{id}','GalleryController@singleAuthorGalleries')->name('profile');
 
 

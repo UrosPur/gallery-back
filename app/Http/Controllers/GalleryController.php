@@ -81,12 +81,20 @@ class GalleryController extends Controller
     {
         return Gallery::where('id', $id)->with('images', 'user')->first();
     }
+
     public function singleUserGalleries($id)
     {
 
         $user = User::find($id);
 
         $user = auth()->user();
+
+        return Gallery::where('user_id', $id)->with('images', 'user')->get();
+    }
+
+    public function singleAuthorGalleries($id)
+    {
+
 
         return Gallery::where('user_id', $id)->with('images', 'user')->get();
     }
