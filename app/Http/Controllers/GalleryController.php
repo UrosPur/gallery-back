@@ -80,7 +80,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        return Gallery::where('id', $id)->with('images', 'user')->first();
+        return Gallery::where('id', $id)->with('images', 'user','comments')->first();
     }
 
     public function singleUserGalleries($id)
@@ -90,7 +90,7 @@ class GalleryController extends Controller
 
         $user = auth()->user();
 
-        return Gallery::where('user_id', $id)->with('images', 'user')->get();
+        return Gallery::where('user_id', $id)->with('images', 'user','comments')->get();
     }
 
     public function singleAuthorGalleries($id)
