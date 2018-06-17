@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gallery;
+use App\User;
 
 class GalleryController extends Controller
 {
@@ -47,6 +48,15 @@ class GalleryController extends Controller
     public function show($id)
     {
         return Gallery::where('id', $id)->with('images', 'user')->first();
+    }
+    public function singleUserGalleries($id)
+    {
+
+        $user = User::find($id);
+
+        $user = auth()->user();
+
+        return Gallery::where('user_id', $id)->with('images', 'user')->get();
     }
 
     /**

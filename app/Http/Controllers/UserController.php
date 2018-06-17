@@ -46,7 +46,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::with('galleries')->find($id);
+        return User::with('galleries','images')->find($id);
     }
 
     /**

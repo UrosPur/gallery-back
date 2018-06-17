@@ -30,6 +30,6 @@ Route::middleware('api')->get('/galleries/{id}','GalleryController@show')->name(
 Route::middleware('jwt')->post('/galleries','GalleryController@store')->name('gallery-store');
 Route::middleware('jwt')->put('/galleries/{id}','GalleryController@update')->name('gallery-update');
 
-Route::middleware('jwt')->get('/author/{id}','UserController@show')->name('profile');
+Route::middleware('jwt')->get('/my-galleries/{id}','GalleryController@singleUserGalleries')->name('profile');
 
 
