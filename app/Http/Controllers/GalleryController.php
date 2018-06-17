@@ -125,15 +125,6 @@ class GalleryController extends Controller
 
     public function delete($id)
     {
-//        return response()->json(compact('You do not have permissions todelete this gallery'));
-//
-//        if($request['USERID']){
-//
-//        $gallery = Gallery::find($request['id']);
-//        $gallery->delete();
-//        return response()->json(compact('deleted'));
-//
-//        }
 
         $gallery = Gallery::find($id);
         $gallery->delete();
