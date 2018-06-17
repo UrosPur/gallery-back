@@ -80,6 +80,7 @@ class RegisterController extends Controller
     public function register(request $request)
     {
 
+
         $registerUser = $this->validator([
 
             'first_name' => $request['first_name'],
@@ -98,13 +99,15 @@ class RegisterController extends Controller
         }else{
 
 
-        $this->create([
-            'first_name' => $request['first_name'],
-            'last_name' => $request['last_name'],
-            'email' => $request['email'],
-            'password' => $request['password'],
-            'terms' => $request['terms']
-        ]);
+            $user = new User();
+
+            $user->first_name = $request['first_name'];
+            $user->last_name = $request['last_name'];
+            $user ->email= $request['email'];
+            $user ->password = $request['password'];
+            $user ->terms = $request['terms'];
+
+            $user->save();
 
 
             $credentials = $request->only([ 'email', 'password' ]);
